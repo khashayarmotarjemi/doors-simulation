@@ -1,9 +1,7 @@
 package io.khashayar.run;
 
+import io.khashayar.game.*;
 import io.khashayar.game.config.Config;
-import io.khashayar.game.Door;
-import io.khashayar.game.Result;
-import io.khashayar.game.Sim;
 import io.khashayar.game.window.SimpleWindowProvider;
 import io.khashayar.game.window.SizedRandomWindowProvider;
 import io.khashayar.game.window.WindowProvider;
@@ -16,7 +14,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        final Config config = new Config(1000, 100);
+        final Config config = new Config(1000, 10);
 
         final ArrayList<Door> doors = new ArrayList<Door>() {
             {
@@ -31,7 +29,21 @@ public class Main {
         for (int i = 1; i <= 5; i++) {
             final WindowProvider srwp = new SizedRandomWindowProvider(doors, i);
 
-            final Sim simulation = new Sim(config, srwp);
+            final Agent agent = new WeirdAgent(config,doors);
+            final Sim simulation = new Sim(config, srwp, agent);
+            Result result = simulation.run();
+            System.out.println("Window Size: " + i);
+            System.out.println("Door frequency: " + result.doorFreq());
+            System.out.println("Intensity: " + measureIntensity(new ArrayList<>(List.of(1, 2)), new ArrayList<>(List.of(3, 4, 5)), result.selection));
+            System.out.println();
+        }
+
+
+        for (int i = 1; i <= 5; i++) {
+            final WindowProvider srwp = new SizedRandomWindowProvider(doors, i);
+
+            final Agent agent = new WindowAgent(config);
+            final Sim simulation = new Sim(config, srwp, agent);
             Result result = simulation.run();
             System.out.println("Window Size: " + i);
             System.out.println("Door frequency: " + result.doorFreq());

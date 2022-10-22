@@ -11,9 +11,9 @@ public class Sim {
 
     private final WindowProvider windowProvider;
 
-    public Sim(Config c, WindowProvider wp) {
+    public Sim(Config c, WindowProvider wp, Agent agent) {
         this.config = c;
-        this.agent = new Agent(c);
+        this.agent =agent;
         this.result = new Result(c);
         this.windowProvider = wp;
     }
