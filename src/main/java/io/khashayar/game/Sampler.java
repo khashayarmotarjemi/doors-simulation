@@ -18,7 +18,7 @@ public class Sampler {
     public ArrayList<Door> sample(Window window) {
         final int windowSize = window.doors.size();
         double[] probSamples = new double[windowSize];
-        Arrays.fill(probSamples, 1.0 / windowSize);
+        Arrays.fill(probSamples, 1.0 / 5);
 
         for (int i = 0; i < rounds; i++) {
             int choice = (int) (Math.random() * (windowSize));

@@ -8,4 +8,9 @@ public class Door {
         this.number = number;
         this.prob = prob;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Door && ((Door) obj).number == number;
+    }
 }
